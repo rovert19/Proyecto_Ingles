@@ -5,9 +5,7 @@ export const Logo = () => {
     <div className="logo-container">
       <div className="logo">
         <span>A</span>
-        <span>
-          <img src={require("../img/logo-icon2.png")} alt="Logo" />
-        </span>
+        <img src={require("../img/logo-icon2.png")} alt="Logo" />
         <span>L</span>
       </div>
     </div>

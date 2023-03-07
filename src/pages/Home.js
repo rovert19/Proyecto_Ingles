@@ -1,6 +1,10 @@
+import { Logo } from "../components/Logo";
 
 export const Home = () => {
   return (
-    <div>Home Page</div>
-  )
-}
+    <div>
+      <Logo />
+      <div>Home Page</div>
+    </div>
+  );
+};

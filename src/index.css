@@ -17,3 +17,24 @@
     font-family: "CustomFont-MS-E";
     src: url("./fonts/more_sugar_font/MoreSugar-Regular.otf");
 }
+
+/* 
+===============================================================
+Buttons : Pruebas
+===============================================================
+*/
+
+/* button{
+    width: 200px;
+    border-radius: 7px;
+    border:none;
+    background-color: #1CAF9A;
+    height: 30px;
+    color: #ffff;
+}
+button:hover{
+    background-color:  #158373;
+}
+button:active{
+    background-color: #1CAF9A;
+} */
