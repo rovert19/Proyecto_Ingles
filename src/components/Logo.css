@@ -1,0 +1,21 @@
+
+/* 
+===============================================================
+Logo
+===============================================================
+*/
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo span{
+    font-size: 3rem;
+    font-family: "CustomFont-MS-E";
+}
+
+.logo span img{
+    width: 1.5rem;
+}

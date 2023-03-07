@@ -1,1 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "CustomFont-MS-T" , sans-serif;
+}
 
+@font-face {
+    font-family: "CustomFont-MS-T";
+    src: url("./fonts/more_sugar_font/MoreSugar-Thin.otf");
+}
+@font-face {
+    font-family: "CustomFont-MS-R";
+    src: url("./fonts/more_sugar_font/MoreSugar-Regular.otf");
+}
+@font-face {
+    font-family: "CustomFont-MS-E";
+    src: url("./fonts/more_sugar_font/MoreSugar-Regular.otf");
+}
