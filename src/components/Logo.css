@@ -19,3 +19,22 @@ Logo
 .logo img{
     width: 1.5rem;
 }
+/* 
+=======================
+For landing Page
+=======================
+*/
+.logo-landing{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-landing span{
+    font-size: 15rem;
+    font-family: "CustomFont-MS-E";
+}
+
+.logo-landing img{
+    width: 10rem;
+}

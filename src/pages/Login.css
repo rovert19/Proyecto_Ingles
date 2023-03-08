@@ -80,7 +80,19 @@ Forgot pass
 
 .forgot-pass{
     width: 100%;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.forgot-pass p{
+    
+    cursor: pointer;
+    color: #626ed4;
+}
+
+.forgot-pass p:hover{
+    color: #3b4390;
 }
 
 /* 
@@ -129,6 +141,7 @@ Social Sign In
     border: 2px solid #ced4da;
     border-radius: 0.5rem;
     transition: background-color 0.15s ease-in-out;
+    cursor: pointer;
 }
 
 .google-sign-in:hover{

@@ -1,0 +1,47 @@
+.landing{
+height: 100vh;
+width: 100%;
+}
+
+.center-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.landing-container {
+    height: 100vh;
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "landing-top-left landing-center landing-center landing-top-right"
+      ". landing-center landing-center ."
+      "landing-bottom-left landing-center landing-center landing-bottom-right"; 
+  }
+  .landing-center { 
+    grid-area: landing-center;
+    text-align: center;
+ }
+  .landing-top-left { grid-area: landing-top-left; }
+  .landing-top-right { grid-area: landing-top-right; }
+  .landing-bottom-left { grid-area: landing-bottom-left; }
+  .landing-bottom-right { grid-area: landing-bottom-right; }
+
+
+.btn-landing{
+    width: 30%;
+    border-radius: 7px;
+    border:none;
+    background-color: rgb(69, 222, 171);
+    min-height: 30px;
+}
+.btn-landing:hover{
+    background-color: rgb(59, 187, 145);
+}
+.btn-landing:active{
+    background-color: rgb(69, 222, 171);
+}

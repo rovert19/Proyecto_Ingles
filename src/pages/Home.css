@@ -1,0 +1,25 @@
+.home{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.btn-logout{
+    width: 100px;
+    border-radius: 7px;
+    border:none;
+    background-color: #b51f2e;
+    min-height: 30px;
+    color: #eee;
+}
+.btn-logout:hover{
+    background-color: #8b1420;
+}
+.btn-logout:active{
+    background-color: #b51f2e;
+}
