@@ -1,0 +1,16 @@
+.home-section{
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: scroll; */
+}
+.home-content{
+    margin-top: 80px;
+    /* overflow-y: scroll; */
+}
+.progress-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}

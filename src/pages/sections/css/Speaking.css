@@ -1,0 +1,7 @@
+.speaking-section{
+    display: flex;
+    flex-direction: column;
+}
+.speaking-content{
+    margin-top: 80px;
+}

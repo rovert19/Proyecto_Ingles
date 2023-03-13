@@ -1,12 +1,16 @@
-import { Logo } from "../components/Logo";
+import { NavBar } from "../components/NavBar";
 import { useAuth } from "../context/authContext";
-import './Home.css'
+import { Routes, Route , Outlet } from "react-router-dom";
+import "./Home.css";
+import {useParams} from "react-router-dom"; 
 
 export const Home = () => {
+  const { user, logout, loading } = useAuth();
 
-  const { user,logout ,loading } = useAuth();
+  // const {id}= useParams();
+  // console.log(id);
 
-  const handleLogout= async()=>{
+  const handleLogout = async () => {
     try {
       await logout();
     } catch (error) {
@@ -14,21 +18,25 @@ export const Home = () => {
     }
   };
 
-
-  if(loading){
-    return (
-      <h1>Loading</h1>
-    );
+  if (loading) {
+    return <h1>Loading</h1>;
   }
 
   return (
     <div className="home">
-      <Logo />
-      <h1>Home Page</h1>
-      <p>Welcome {user.displayName || user.email }</p>
-      <p><strong>Falta xD</strong></p>
-      <button className="btn-logout" onClick={handleLogout}>Logout</button>
+      <div className="home-container">
+
+        <div className="navbar-section">
+          <NavBar />
+        </div>
+        
+        <div className="main-section">
+          <Outlet/>
+          <button className="btn-logout" onClick={handleLogout}>
+              Logout
+          </button>
+        </div>
+      </div>
     </div>
   );
-
 };

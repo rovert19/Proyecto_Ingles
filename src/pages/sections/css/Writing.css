@@ -1,0 +1,7 @@
+.writing-section{
+    display: flex;
+    flex-direction: column;
+}
+.writing-content{
+    margin-top: 80px;
+}
