@@ -1,0 +1,7 @@
+.reading-section{
+    display: flex;
+    flex-direction: column;
+}
+.reading-content{
+    margin-top: 80px;
+}

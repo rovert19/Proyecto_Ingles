@@ -1,0 +1,7 @@
+.listening-section{
+    display: flex;
+    flex-direction: column;
+}
+.listening-content{
+    margin-top: 80px;
+}

@@ -9,13 +9,14 @@ export const Landing = () => {
   const navigate = useNavigate();
   return (
     <div className="landing">
-
       <div className="landing-container">
         <div className="landing-center center-content">
           <h1>Welcome to!</h1>
           <Logo size="logo-landing" />
           <h1>An opportunity to improve your English</h1>
-          <button className="btn-landing" onClick={() => navigate("/login")}>Login</button>
+          <button className="btn-landing" onClick={() => navigate("/login")}>
+            Login
+          </button>
         </div>
         <div className="landing-top-left center-content">
           <img src={botImage} alt="Bot" /> {/* utiliza la variable que contiene la imagen importada */}

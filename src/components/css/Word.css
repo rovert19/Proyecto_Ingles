@@ -1,0 +1,22 @@
+
+.word-box{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.word-container{
+    background-color: aquamarine;
+    border-radius: 30px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+    padding: 5px 10px;
+}
+.word-actions img{
+    width: 30px;
+    margin: 0 10px ;
+}
