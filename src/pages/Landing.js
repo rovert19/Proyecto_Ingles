@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import "./Landing.css";
+import botImage from "../img/bot.png"; // importa la imagen como un módulo
+import leerImage from "../img/leer.png";
+import notasImage from "../img/notas.png";
+import comunicacionImage from "../img/comunicacion.png";
 export const Landing = () => {
   const navigate = useNavigate();
   return (
@@ -14,16 +18,16 @@ export const Landing = () => {
           <button className="btn-landing" onClick={() => navigate("/login")}>Login</button>
         </div>
         <div className="landing-top-left center-content">
-          <Logo />
+          <img src={botImage} alt="Bot" /> {/* utiliza la variable que contiene la imagen importada */}
         </div>
         <div className="landing-top-right center-content">
-          <Logo />
+          <img src={notasImage} alt="Notas" />
         </div>
         <div className="landing-bottom-left center-content">
-          <Logo />
+          <img src={leerImage} alt="Leer" />
         </div>
         <div className="landing-bottom-right center-content">
-          <Logo />
+          <img src={comunicacionImage} alt="Comunicacion" />
         </div>
       </div>
     </div>

@@ -26,7 +26,26 @@ width: 100%;
     grid-area: landing-center;
     text-align: center;
  }
-  .landing-top-left { grid-area: landing-top-left; }
+ .landing-top-left img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .landing-bottom-left img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .landing-top-right img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .landing-bottom-right img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+  }
   .landing-top-right { grid-area: landing-top-right; }
   .landing-bottom-left { grid-area: landing-bottom-left; }
   .landing-bottom-right { grid-area: landing-bottom-right; }
