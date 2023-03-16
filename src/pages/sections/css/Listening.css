@@ -1,7 +1,20 @@
-.listening-section{
+.search-container {
     display: flex;
-    flex-direction: column;
-}
-.listening-content{
-    margin-top: 80px;
-}
+    justify-content: center;
+    padding-top: 8rem;
+  }
+  
+  input[type="text"] {
+    width: 80%;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    padding: 0px 20px;
+    font-size: 1.2rem;
+  }
+  
+  input[type="text"]::placeholder {
+    font-size: 1.2rem;
+  }
+  

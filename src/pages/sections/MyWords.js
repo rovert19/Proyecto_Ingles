@@ -11,7 +11,7 @@ export const MyWords = () => {
       <div className="words-content">
         <div className="study-option">
           
-          <NavLink className="vocabulary-option" to="mywords">
+          <NavLink className="vocabulary-option" to="/sub_sections/myvocabularyy">
           <h2>My vocabulary</h2>
             <img src={require('../../img/vocabulary.png')} alt="" />
           </NavLink>
