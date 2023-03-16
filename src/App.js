@@ -39,7 +39,6 @@ function App() {
             <Route path="reading" element={<Reading/> } />
             <Route path="words" element={<MyWords/>}>
              <Route path="mywords" element={<MyVocabulary/>}/>
-             <Route path="mywords" element={<MyVocabulary/>}/>
              <Route path="review" element={<Review/>}/>
             </Route>
           </Route>

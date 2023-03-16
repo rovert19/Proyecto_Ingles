@@ -1,8 +1,8 @@
 import { NavBar } from "../components/NavBar";
 import { useAuth } from "../context/authContext";
-import { Routes, Route , Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./Home.css";
-import {useParams} from "react-router-dom"; 
+// import {useParams} from "react-router-dom"; 
 
 export const Home = () => {
   const { user, logout, loading } = useAuth();
@@ -10,13 +10,13 @@ export const Home = () => {
   // const {id}= useParams();
   // console.log(id);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await logout();
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
 
   if (loading) {
     return <h1>Loading</h1>;
@@ -32,9 +32,9 @@ export const Home = () => {
         
         <div className="main-section">
           <Outlet/>
-          <button className="btn-logout" onClick={handleLogout}>
+          {/* <button className="btn-logout" onClick={handleLogout}>
               Logout
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

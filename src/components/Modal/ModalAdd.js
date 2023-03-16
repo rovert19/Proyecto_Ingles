@@ -1,51 +1,41 @@
-import "../css/Word.css";
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { updateWord, deleteWord } from "../../firebase-crud";
+import { addWord } from "../../firebase-crud";
+import "./ModalAdd.css";
 
-export const Word = ({ word, mean, wordID }) => {
-  const initialState = {
-    word: word,
-    mean: mean,
-  };
-
-  const [newWord, setNewWord] = useState(initialState);
+const initialState = {
+  word: "",
+  mean: "",
+};
+export const ModalAdd = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [newWord, setNewWord] = useState(initialState);
 
   const handleInputChange = ({ target: { name, value } }) => {
     return setNewWord({ ...newWord, [name]: value });
   };
 
-  const onDeleteLink = async (idx) => {
-    await deleteWord(idx);
-    setShow(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateWord(wordID, newWord);
+    await addWord(newWord);
     setShow(false);
     setNewWord(initialState);
   };
+
   return (
-    <div className="word-box">
-      <div className="word-container">
-        <span className="word-new">{word}</span>
-        <span>|</span>
-        <span className="word-mean">{mean}</span>
-        <div className="word-actions">
-          <img src={require('../../img/voice.png')} alt="Voice word option" />
-          <button onClick={handleShow}>
-            <img src={require('../../img/edit.png')} alt="Edit word option" />
-          </button>
-        </div>
+    <div>
+      <div className="btn-add">
+        <Button variant="success" onClick={handleShow}>
+          Add Word
+        </Button>
       </div>
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Edit</Modal.Title>
+            <Modal.Title>Add New Word</Modal.Title>
           </Modal.Header>
           <form onSubmit={handleSubmit}>
             <Modal.Body>
@@ -79,17 +69,11 @@ export const Word = ({ word, mean, wordID }) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button
-                variant="danger"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDeleteLink(wordID);
-                }}
-              >
-                Delete
-              </Button>
+              {/* <Button variant="danger" onClick={handleClose}>
+            Eliminar
+          </Button> */}
               <Button variant="primary" type="submit">
-                Save
+                Add
               </Button>
             </Modal.Footer>
           </form>

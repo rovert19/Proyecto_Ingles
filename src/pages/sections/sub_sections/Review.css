@@ -1,0 +1,19 @@
+/* .active .carousel-item{
+    border: 3px solid red;
+    text-align: center;
+    padding-top: 10px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+.carousel-container{
+    background-color: black;
+    width: 400px;
+    height: 300px;
+}
+
+/* .customx{
+    padding: 75px 0 40px 40px;
+} */
+

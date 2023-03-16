@@ -5,6 +5,7 @@
 }
 .home-content{
     margin-top: 80px;
+    padding: 0 2rem;
     /* overflow-y: scroll; */
 }
 .progress-container{
