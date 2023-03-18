@@ -8,4 +8,5 @@
     font-size: 1.5rem;
     width: calc(100% - 250px);
     height: 80px;
+    z-index: 100;
 }

@@ -6,6 +6,12 @@ import { Review } from "./sub_sections/Review";
 import { useState } from "react";
 import { BtnBack } from "../../components/button/BtnBack";
 
+import { ModalAdd } from "../../components/Modal/ModalAdd";
+import { ModalInfo } from "../../components/Modal/ModalInfo";
+
+import { useEffect } from "react";
+import { getWords } from "../../firebase-crud";
+
 export const MyWords = () => {
   const [option1, setOption1] = useState(true);
   const [option2, setOption2] = useState(true);
@@ -22,11 +28,26 @@ export const MyWords = () => {
     setOption1(true);
     setOption2(true);
   };
+  //Obtencion de la lista de palabras:
+  const [mywords, setMyWords] = useState([]);
+  const getWordList = async () => {
+    const data = await getWords();
+    setMyWords(
+      data.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      })
+    );
+  };
+
+  useEffect(() => {
+    getWordList();
+  }, [mywords]);
 
   return (
     <div className="words-section">
-      <Header text="My Words" />
-
+      {option1 && option2 && <Header text="My words" />}
+      {!option1 && option2 && <Header text="My vocabulary" />}
+      {!option2 && option1 && <Header text="It's time to review" />}
       <div className="words-content">
         <div className="study-option">
           {!option2 ||
@@ -36,12 +57,16 @@ export const MyWords = () => {
                 <img src={require("../../img/vocabulary.png")} alt="" />
               </div>
             )) || (
-              <>
-              <MyVocabulary />
-                <div onClick={handleBack}>
+              <div className="vocabulary-open">
+                <div className="modal-add-position">
+                  <ModalAdd />
+                </div>
+
+                <MyVocabulary ListWords={mywords} />
+                <div onClick={handleBack} className="btn-back-container">
                   <BtnBack />
                 </div>
-              </>
+              </div>
             )}
 
           {!option1 ||
@@ -51,12 +76,17 @@ export const MyWords = () => {
                 <img src={require("../../img/review.png")} alt="" />
               </div>
             )) || (
-              <>
-                <Review />
-                <div onClick={handleBack}>
+              <div className="review-open">
+                <Review ListWords={mywords} />
+                <div className="info-container">
+                  <ModalInfo />
+                </div>
+
+                <p>"Education is the key to success"</p>
+                <div onClick={handleBack} className="btn-back-container">
                   <BtnBack />
                 </div>
-              </>
+              </div>
             )}
         </div>
         {option1 && option2 && <p>"The future depends on what you do today"</p>}

@@ -1,0 +1,45 @@
+
+.btn-info img{
+    width: 50px;
+    border-radius: 10px;
+}
+
+.btn-info-custom{
+    /* border: 2px solid red; */
+    cursor: pointer;
+    /* background-color: #E5BA73; */
+    transition: transform 0.5s ease;
+}
+.btn-info-custom:hover{
+    /* border: 2px solid red; */
+    cursor: pointer;
+    transform: scale(1.2);
+    /* background-color: #C58940;   */
+}
+
+.modal-info-content{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem;
+    font-size: 1.2rem;
+}
+.modal-info-content p {
+    text-align: center;
+}
+
+.info-option{
+    display: flex;
+    align-items: center;
+}
+
+
+.info-option span:nth-of-type(2){
+    text-align: center;
+    width: 100%;
+}
+
+
+.modal-info-content div span img{
+    width: 50px;
+    margin-right: 1rem;
+}

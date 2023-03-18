@@ -1,7 +1,21 @@
 .speaking-section{
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 .speaking-content{
+    min-height: calc(100vh - 80px);
     margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 400px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.speaking-content img{
+    width: 150px;
 }

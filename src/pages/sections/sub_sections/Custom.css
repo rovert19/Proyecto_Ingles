@@ -1,0 +1,23 @@
+
+.review-words-option img{
+    width: 60px;
+    margin-right: 1rem;
+}
+
+.custom-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.custom-container h2{
+    font-size: 3rem;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+.custom-container h2:hover{
+    transform: scale(1.2);
+}
