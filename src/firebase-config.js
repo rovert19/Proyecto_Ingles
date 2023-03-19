@@ -2,7 +2,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
-import { getStorage, ref, uploadBytes,listAll ,getDownloadURL ,connectStorageEmulator} from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+  connectStorageEmulator,
+} from "firebase/storage";
 // import firebase from "firebase/app";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,7 +30,6 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-
 // Nos conectamos al getStorage
 export const storage = getStorage(app);
 export async function uploadBooks(file, name) {
@@ -31,15 +37,45 @@ export async function uploadBooks(file, name) {
   return await uploadBytes(storageref, file);
 }
 
+const folderRef = ref(storage, "books/");
 
-const folderRef= ref(storage,'books/')
-listAll(folderRef).then((res) => {
-  console.log(`La carpeta contiene ${res.items.length} elementos`);
-  console.log(res)
-}).catch((error) => {
-  console.log('Ocurrió un error al verificar cuántos elementos hay en la carpeta:', error);
-});
+export const resFile = async () => {
+  try {
+  const res = await listAll(folderRef);
+  // console.log(`La carpeta contiene ${res.items.length} elementos`);
+  return res; // Devuelve el valor de "res" como una promesa resuelta
+} catch (error) {
+  console.log(
+    "Ocurrió un error al verificar cuántos elementos hay en la carpeta:",
+    error
+  );
+  throw error; // Lanza el error como una promesa rechazada
+}
+};
 
+
+// try {
+//   const res = await listAll(folderRef);
+//   console.log(`La carpeta contiene ${res.items.length} elementos`);
+//   console.log(res);
+// } catch (error) {
+//   console.log(
+//     "Ocurrió un error al verificar cuántos elementos hay en la carpeta:",
+//     error
+//   );
+// }
+
+// listAll(folderRef)
+//   .then((res) => {
+//     console.log(`La carpeta contiene ${res.items.length} elementos`);
+//     console.log(res);
+//   })
+//   .catch((error) => {
+//     console.log(
+//       "Ocurrió un error al verificar cuántos elementos hay en la carpeta:",
+//       error
+//     );
+//   });
 
 //Download PDF
 
@@ -55,13 +91,10 @@ listAll(folderRef).then((res) => {
 //   console.log('Ocurrió un error al obtener la URL del archivo PDF:', error);
 // });
 
-
 //Firebase Emulator
 
-if (window.location.hostname === "localhost") {
-  connectAuthEmulator(auth, "http://localhost:9099");
-  connectFirestoreEmulator(db, "localhost", 8080);
-  connectStorageEmulator(storage, "localhost", 9199);
-}
-
-
+// if (window.location.hostname === "localhost") {
+//   connectAuthEmulator(auth, "http://localhost:9099");
+//   connectFirestoreEmulator(db, "localhost", 8080);
+//   connectStorageEmulator(storage, "localhost", 9199);
+// }

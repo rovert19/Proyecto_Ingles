@@ -1,7 +1,32 @@
 .writing-section{
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 .writing-content{
+    min-height: calc(100vh - 80px);
     margin-top: 80px;
 }
+
+.chatbot-container{
+    position: relative;
+    padding: 5% 20%;
+}
+.chatbot-container img{
+    transform: translateX(-80px);
+    position: fixed;
+    width: 80px;
+    z-index: 2;
+}
+
+/* .chatbot-container{
+    overflow-y: auto;
+} */
+
+/* .cs-main-container{
+    max-height: calc(100vh - 100px);
+}
+.cs-main-container .cs-chat-container{
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+} */

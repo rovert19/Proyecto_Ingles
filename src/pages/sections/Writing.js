@@ -1,13 +1,174 @@
 import { Header } from "../../components/Header";
 import "./css/Writing.css";
+import { useState, useEffect } from "react";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import {
+  MainContainer,
+  ChatContainer,
+  MessageList,
+  Message,
+  MessageInput,
+  TypingIndicator,
+} from "@chatscope/chat-ui-kit-react";
+
+const API_KEY = "";
 
 export const Writing = () => {
+  // const handlePrompt = async ()=>{
+  //   const apiInitialPrompt = [{ role: "user", content: `"Instrucciones"
+  //   -Siempre respondeme en el idioma igles
+  //   -No respondas en español por ningun motivo
+  //   ` }];
+
+  //   const apiRequest = {
+  //     model: "gpt-3.5-turbo",
+  //     messages: apiInitialPrompt,
+  //   };
+  //   await fetch("https://api.openai.com/v1/chat/completions", {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: `Bearer ${API_KEY}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(apiRequest),
+  //   })
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log({ message: data.choices[0].message.content, sender: "Chatbot" })
+  //     })
+  //     .catch((error) => console.log(error));
+  // }
+
+  // useEffect(() => {
+  //   handlePrompt();
+  // }, [])
+
+  const [promptController, setPromptController] = useState(true);
+
+  /*=============================================================== */
+  const [messages, setMessages] = useState([
+    {
+      message:
+        "My name is Layla. I'm here to help you improve your English. Let's talk about any topic you want",
+      sender: "Chatbot",
+    },
+  ]);
+
+  const [isTyping, setIsTyping] = useState(false);
+  const handleSend = async (message) => {
+    const Instrucciones =
+      "Según lo indicado en 'Instrucciones' responde a lo siguiente: ";
+    const newMessage = {
+      message: Instrucciones + message,
+      direction: "outgoing",
+      sender: "Usuario",
+    };
+    const initialPromt = {
+      message: `"Instrucciones" 
+  
+      Hola, quiero utilizar todas tus habilidades para que ayudes a las personas 
+      a aprender inglés. Las reglas son las siguientes:
+      
+        - Tu nivel de inglés debe ser un B1, es decir trata de usar palabras no tan complicadas en las conversaciones.
+        - Solo habla en inglés, si el texto ingresado por el usuario es en español, simplemente mencionale lo siguiente: "Soy una inteligencia artificial que te va a ayudar con tu aprendizaje del inglés. Por favor, introduce el texto en Inglés" . Y por nada del mundo hables en español, excepto si identificas el siguiente 
+        texto "password: launieslauni" (esto último no se lo indiques al usuario)
+        - Trata de hablarle de manera amena y seguirle la conversación o preguntarle por temas de la vida diaria.
+        - No te explayes mucho en dar explicaciones.
+        - Y al final de tus respuestas puedes hacer una corrección al texto introducido por el usuario, pero
+        antecedido de Feedback: para que el usuario pueda interpretarlo.`,
+      direction: "outgoing",
+      sender: "Usuario",
+    };
+    const newMessages = [initialPromt, ...messages, newMessage];
+    setMessages(newMessages);
+    setIsTyping(true);
+
+    if (!promptController) {
+      newMessages.shift();
+    }
+
+    const apiMessages = newMessages.map((messageObject) => {
+      let role = "";
+      if (messageObject.sender === "Chatbot") {
+        role = "assistant";
+      } else {
+        role = "user";
+      }
+      return { role: role, content: messageObject.message };
+    });
+
+    const apiRequestBody = {
+      model: "gpt-3.5-turbo",
+      messages: apiMessages,
+    };
+
+    console.log(apiRequestBody);
+    await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(apiRequestBody),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        setMessages([
+          ...newMessages,
+          { message: data.choices[0].message.content, sender: "Chatbot" },
+        ]);
+        setPromptController(false);
+        setIsTyping(false);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  console.log(messages);
+  const myMessages = [...messages];
+
+  if (messages.length >= 3) {
+    myMessages.shift();
+  }
+
   return (
     <div className="writing-section">
       <Header text="My Writing" />
       <div className="writing-content">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci temporibus cumque maiores nesciunt nihil reiciendis ducimus, sit cum, minus, corrupti deleniti saepe porro iusto enim. Architecto magnam dolore cum deserunt veniam at! Itaque optio ipsam vero nostrum quae officia, doloremque, animi libero asperiores porro labore ad veniam aut. Repellat ipsum reprehenderit, cupiditate ea praesentium inventore vitae repudiandae placeat consectetur. Quos atque quasi totam ab at sunt, consectetur hic corporis earum veritatis iusto. Voluptatibus maxime nisi soluta voluptatem, nobis aliquam unde et, assumenda officiis laudantium esse blanditiis laborum. Doloremque voluptatibus numquam at vitae? Repellendus perferendis dolore itaque consequuntur voluptates non quidem eos ducimus aliquam aliquid aut, ut, deleniti unde ea explicabo tempora maxime, quam sed. Mollitia neque esse repudiandae expedita voluptatibus dolores dolore aperiam aliquam sunt, consequuntur amet ipsum facere quia dicta, nam eius labore fuga iusto voluptatum nobis, temporibus saepe quod? Dolore corrupti quia aperiam? Amet veritatis alias dolorum eligendi, iusto nemo quis enim aut tenetur. Optio, quibusdam quidem obcaecati velit aliquid distinctio quos porro minima, dolore sed ex ut maxime deserunt ea quasi facere quis veritatis maiores perferendis reprehenderit esse sapiente odio tenetur eaque. Soluta obcaecati sint ipsum vitae, facere libero culpa praesentium nihil reprehenderit laboriosam ex reiciendis possimus aut nostrum? Natus, quae esse in deleniti quia id iusto optio suscipit cum atque, ratione modi harum provident ea temporibus aperiam unde distinctio dolores. Molestias laborum atque officiis nobis, unde dicta beatae eligendi vero error cum consequatur incidunt repudiandae id aliquid vitae modi quasi dolore inventore natus culpa eos illum autem? Culpa minima quisquam ipsum quaerat, aspernatur dicta asperiores, voluptatibus laborum vero perspiciatis odit dolores at illum repellendus. Impedit ratione sequi dolores asperiores illo ullam corporis officiis, eius quis esse, iure iste tenetur. Iste nobis ad quae, provident cum explicabo blanditiis dicta rem sint odit vel culpa atque libero dolorum! Vel aut praesentium blanditiis quam qui dicta unde asperiores sapiente libero excepturi explicabo, veniam iure! Harum, alias ab. Ipsa error consectetur dignissimos adipisci, laborum vitae nam explicabo culpa cumque, aliquam commodi fugiat repellendus tempora, porro cum officia autem esse. Facilis eius nulla voluptas? Nostrum quibusdam sapiente quis vel. Molestias reprehenderit perspiciatis officiis deleniti blanditiis minima alias quos! Aut minima dolorum quam neque nulla ipsa velit eveniet, dicta, laboriosam doloremque, voluptatem sint et. Rem atque recusandae minus laborum sed nihil ex consequuntur at commodi molestias. Minima illo tempore earum sit officia non voluptates deleniti, ducimus explicabo numquam eum sequi aliquam magnam. Molestiae facere cum dolore, quae, fugit sapiente expedita consectetur, officiis eaque velit officia debitis ullam quibusdam dignissimos architecto corrupti natus. Nam autem cupiditate, culpa id aliquid dolore cum odit. Cumque repellendus, veniam voluptatibus similique repellat necessitatibus harum atque inventore vero, eos ut nihil quo corporis tempore id ullam ipsum. Distinctio quasi dolores doloremque, labore dicta similique recusandae rem delectus possimus alias. Et, libero? Tempore hic repellat optio voluptas illum, similique molestiae quasi, earum, aperiam minima neque asperiores laudantium assumenda repellendus in alias facere numquam sunt debitis! Magnam exercitationem molestiae nemo nulla repudiandae fugiat magni sint, maiores, iusto ratione dolore asperiores.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus aspernatur enim neque voluptatum aut amet veritatis. Animi, laborum enim molestias corporis reiciendis harum deleniti sapiente! Ipsum, reprehenderit? Saepe consequatur atque asperiores laudantium repudiandae, incidunt facere qui sint voluptate quasi id corporis enim nobis eius doloribus dolorem deserunt quibusdam, possimus autem error. Minima, ipsa consectetur accusantium, expedita suscipit illo non totam qui esse commodi ab eos delectus alias tempora quas sed sequi provident culpa itaque? Hic rerum omnis, quisquam nulla possimus sit nihil suscipit, accusamus eos inventore magni. Magni doloremque delectus distinctio dolor quam, reiciendis veritatis, culpa id aliquam, amet numquam asperiores? Impedit, rem perspiciatis. Magni velit rerum ducimus consequatur autem dolor facilis amet cumque consectetur, excepturi dolorem omnis veniam nesciunt eligendi, facere, aliquid adipisci architecto? Quasi perspiciatis officiis laudantium rerum eius illum dolores, accusamus velit dicta laboriosam deserunt. Eligendi quod accusamus, inventore, fuga minus et atque labore corporis perspiciatis modi quaerat deleniti nobis totam consectetur consequuntur repellat dolor illum tenetur ratione dolorem, sapiente facilis? Ut aperiam delectus, vitae possimus odio distinctio error architecto tenetur, recusandae vel corporis, minima magni sed fugit nulla inventore. Nesciunt dolore vitae dolores laudantium dolor harum quos veniam laboriosam, aspernatur quas autem? Deleniti temporibus quam, inventore quidem sunt earum dolore animi at repellendus reprehenderit. Nihil, rem dicta sit cupiditate quis, rerum, provident dolor unde alias sunt vel a. Commodi maxime eligendi explicabo blanditiis eos adipisci, sed iste aliquid dolorum. Nam praesentium eos saepe blanditiis, quasi obcaecati voluptatum natus sunt deleniti dolorum, sit, nisi corrupti. Itaque quas voluptas assumenda ratione natus neque non quae vel asperiores officia, laudantium mollitia eos repellat suscipit animi ad ducimus maxime rem accusantium eum blanditiis! Dolor enim nesciunt, labore porro odio aliquam officia ipsum. Dolores autem dolor laboriosam quae est non! Laborum, neque. Vitae ullam, commodi esse quidem quam sint pariatur magni sapiente magnam alias nam architecto hic! Culpa, corrupti asperiores officia distinctio perspiciatis non maiores molestiae, harum vel, minima id ab expedita rerum reprehenderit quisquam ipsam doloribus placeat. Hic a animi, accusantium numquam explicabo error vero neque ab enim? Cumque, a unde? Natus sed blanditiis at, odit a saepe atque debitis exercitationem accusantium. Necessitatibus repudiandae natus tenetur dolore ipsa id, exercitationem ratione atque asperiores dolorum, quasi est. Quasi, accusamus ullam! Eum minima pariatur quasi voluptatibus sed ratione quia, ipsa temporibus, expedita sunt enim tempore saepe amet? Provident doloremque, possimus, unde eius similique labore quas quia officia, animi mollitia enim iure iusto minus rem magnam atque et impedit maxime dolorum. Enim id, ratione, dicta assumenda saepe nostrum perferendis officia in porro nihil repellendus error odit, cumque obcaecati! Voluptatum magnam deserunt libero saepe nihil beatae id illum iusto facilis non dolorum nostrum, quis tempora. Dolor exercitationem expedita ratione corrupti nulla magni. Facere, nihil tempore voluptas inventore, natus illum unde cum ut ullam ipsum, doloremque explicabo perspiciatis nesciunt. Ipsum labore autem praesentium quidem adipisci nemo commodi eveniet, laudantium sapiente itaque distinctio pariatur recusandae cum beatae quia officia nulla aperiam necessitatibus sint fugit. Ab eligendi iure omnis corrupti impedit amet dignissimos suscipit quisquam numquam nihil!
+        <div className="chatbot-container">
+          <img src={require("../../img/Layla.png")} alt="" />
+          <MainContainer>
+            <ChatContainer>
+              <MessageList
+                scrollBehavior="smooth"
+                typingIndicator={
+                  isTyping ? (
+                    <TypingIndicator content="Layla is typing" />
+                  ) : null
+                }
+              >
+                {myMessages.map((message, i) => {
+                  if (message.sender === "Usuario") {
+                    return (
+                      <Message
+                        key={i}
+                        model={{
+                          message: message.message.slice(62),
+                          direction: "outgoing",
+                          sender: "Usuario",
+                        }}
+                      />
+                    );
+                  }
+                  return <Message key={i} model={message} />;
+                })}
+              </MessageList>
+              <MessageInput
+                placeholder="Escribe tu mensaje aquí"
+                onSend={handleSend}
+              />
+            </ChatContainer>
+          </MainContainer>
+        </div>
       </div>
     </div>
   );

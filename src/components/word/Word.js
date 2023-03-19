@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { updateWord, deleteWord } from "../../firebase-crud";
 
+const { SpeechSynthesisUtterance } = window;
+
+
 export const Word = ({ word, mean, wordID }) => {
   const initialState = {
     word: word,
@@ -29,6 +32,42 @@ export const Word = ({ word, mean, wordID }) => {
     setShow(false);
     setNewWord(initialState);
   };
+
+  //
+
+  // const getGoogleVoice = () => {
+  //   return new Promise((resolve) => {
+  //     speechSynthesis.onvoiceschanged = () => {
+  //       const voices = speechSynthesis.getVoices();
+  //       const googleVoice = voices.find((voice) => voice.name === 'Google US English');
+  //       resolve(googleVoice);
+  //     };
+  //   });
+  // };
+  // const handleSpeak = async (wordx) => {
+  //   const googleVoice = await getGoogleVoice();
+  //   const utterance = new SpeechSynthesisUtterance(wordx);
+  //   utterance.voice = googleVoice;
+  //   window.speechSynthesis.speak(utterance);
+  // };
+
+  // const speakText = (text) => {
+  //   const utterance = new SpeechSynthesisUtterance(text);
+  //   window.speechSynthesis.speak(utterance);
+  // };
+  // const handleSpeak = () => {
+  //   const utterance = new SpeechSynthesisUtterance(word);
+  //   window.speechSynthesis.speak(utterance);
+  // };
+
+  const speack = (wordl) => {
+    const ut = new SpeechSynthesisUtterance(wordl);
+    ut.lang = "en-GB";
+    const voices = window.speechSynthesis.getVoices();
+    ut.voice = voices[6];
+    speechSynthesis.speak(ut);
+  };
+
   return (
     <div className="word-box">
       <div className="word-container">
@@ -36,7 +75,7 @@ export const Word = ({ word, mean, wordID }) => {
         <span>|</span>
         <span className="word-mean">{mean}</span>
         <div className="word-actions">
-          <img src={require('../../img/voice.png')} alt="Voice word option" />
+          <img onClick={()=>speack(word)} src={require('../../img/voice.png')} alt="Voice word option" />
           <button onClick={handleShow}>
             <img src={require('../../img/edit.png')} alt="Edit word option" />
           </button>

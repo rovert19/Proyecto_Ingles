@@ -6,6 +6,7 @@ import { ModalAdd } from "../../components/Modal/ModalAdd";
 import { useState, useEffect } from "react";
 import { getWords } from "../../firebase-crud";
 
+
 export const HomeSection = () => {
   const [mywords, setMyWords] = useState([]);
   const getWordList = async () => {
@@ -19,6 +20,8 @@ export const HomeSection = () => {
   useEffect(() => {
     getWordList();
   }, [mywords]);
+
+  
   return (
     <div className="home-section">
       <Header text="My progress" />

@@ -15,16 +15,18 @@ export const Landing = () => {
           </button>
         </div>
         <div className="landing-top-left center-content">
-          <Logo />
+          <img src={require("../img/landing/bot.png")} alt="" />
         </div>
         <div className="landing-top-right center-content">
-          <Logo />
+        <img src={require("../img/landing/notas.png")} alt="" />
         </div>
         <div className="landing-bottom-left center-content">
-          <Logo />
+        <img src={require("../img/landing/read.png")} alt="" />
+          
         </div>
         <div className="landing-bottom-right center-content">
-          <Logo />
+        <img src={require("../img/landing/speaking.png")} alt="" />
+          
         </div>
       </div>
     </div>

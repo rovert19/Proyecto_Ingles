@@ -28,7 +28,18 @@
 .word-actions button{
     background: none;
     border: none;
+    
 }
+.word-actions button img,.word-actions img{
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+
+.word-actions button img:hover, .word-actions img:hover {
+    transform: scale(1.2);
+}
+
+
 
 .word-new, .word-mean{
     width: 30%;
